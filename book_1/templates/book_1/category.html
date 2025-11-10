@@ -1,0 +1,27 @@
+{% extends "book_1/base.html" %}
+{% load static %}
+
+
+
+{% block main_content %} 
+    
+<h2>{{ category|capfirst }} Games</h2>
+
+{% if games %}
+    {% for name, info in games.items %}
+        <a href="{% url 'page2_detail' category=category id=info.id names=name %}">
+            {{ info.title }}
+        </a><br>
+    {% endfor %}
+{% else %}
+    <p>No games found in this category.</p>
+{% endif %}
+
+<br>
+<a href="{% url 'page2' %}">⬅ Back to Categories</a>
+
+
+
+
+    
+    {% endblock %}

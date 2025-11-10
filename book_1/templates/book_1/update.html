@@ -1,0 +1,21 @@
+{% extends "book_1/base.html" %}
+{% load static %}
+
+
+{% block main_content %}  
+
+
+{% block content %}
+<div class="container mt-4">
+  <h2>✏️ Update Gamer</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Save Changes</button>
+    <a href="{% url 'list_gamers' %}" class="btn btn-secondary">Back</a>
+  </form>
+</div>
+{% endblock %}
+
+
+{% endblock %}

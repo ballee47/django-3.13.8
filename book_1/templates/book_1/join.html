@@ -1,0 +1,133 @@
+{% extends "book_1/base.html" %}
+{% load static %}
+
+
+
+
+{%  block title  %}
+ <style>
+    body {
+      background: url('book_1\static\book_1\hero.jpg') center/cover no-repeat;
+      height: 100vh;
+      {% comment %} display: flex; {% endcomment %}
+      justify-content: center;
+      align-items: center;
+      background-color: #848493ff;
+    }
+    .box1{
+      margin-left :550px;
+
+
+    }
+
+    .form-box {
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 40px;
+      border-radius: 10px;
+      width: 350px;
+      color: #fff;
+      box-shadow: 0 0 15px rgba(255, 193, 7, 0.4);
+
+    }
+
+    .form-box h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #ffc107;
+    }
+
+    .form-control {
+      background-color: #ffffffff;
+      color: white;
+      border: none;
+      width: 200px;
+      margin-left:400px;
+    }
+
+    .form-control:focus {
+      background-color: #2b2b2b;
+      color: white;
+      border: 1px solid #ffc107;
+      box-shadow: none;
+    }
+
+    .btn-warning {
+      width: 100%;
+      font-weight: bold;
+            width: 200px;
+                  margin-left:400px;
+
+
+    }
+
+     a {
+      color: #ffc107;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    } 
+    .form-select{
+                       margin-left:400px;
+                       width:250px;
+
+    }
+
+    p > label {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 6px;
+                    margin-left:400px;
+
+}
+    
+
+
+    
+  </style> 
+
+
+
+
+
+
+
+{% endblock %}
+
+
+
+
+{% block main_content %} 
+    
+    
+    
+       <form method="POST"  enctype="multipart/form-data" >
+      {% csrf_token %}
+     
+        {{ form.as_p }}
+
+
+
+
+      <button type="submit" class="btn btn-warning mt-3">Submit</button>
+
+
+      </div>
+
+
+    </form>
+    
+    
+  <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+  
+    
+    {% endblock %}
+
+
+

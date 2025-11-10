@@ -1,0 +1,22 @@
+{% extends "book_1/base.html" %}
+{% load static %}
+
+{% block main_content %} 
+    
+    
+    
+    
+    
+  
+
+
+
+<<h1>{{ title }}</h1>
+<p>{{ desc }}</p>
+<p>Rating: {{ rating }}</p>
+<p>Category: {{ category }}</p>
+<p>ID: {{ id }}</p>
+
+
+<a href="{% url 'page2_category' category=category %}">⬅ Back to {{ category|capfirst }} Games</a>
+  {% endblock %}

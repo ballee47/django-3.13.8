@@ -1,0 +1,66 @@
+{% extends "book_1/base.html" %}
+{% load static %}
+
+{% block main_content %} 
+
+
+  {% for message1 in messages %}
+    <div class="alert alert-success">{{ message1 }}</div>
+  {% endfor %}
+
+
+
+
+{% block content %}
+
+ <div class="container mt-4">
+  <h2>🎮 Gamer List</h2>
+  <a href="{% url 'joinpage' %}" class="btn btn-primary mb-3">Add New Gamer</a>
+  <table class="table table-bordered table-striped">
+    <tr>
+      <th>id</th>
+      <th>name</th>
+      <th>password</th>
+      <th>email</th>
+      <th>Character</th>
+      <th>Game</th>
+      <th>type</th>
+      <th>Picture</th>
+      <th>Actions</th>
+    </tr>
+    {% for g in gamers %}
+    <tr>
+      <td>{{ g.id }}</td>
+      <td>{{ g.username }}</td>
+      <td>{{ g.password }}</td>
+      <td>{{ g.email }}</td>
+      <td>{{ g.character }}</td>
+      <td>{{ g.game }}</td>
+      <td>{{ g.type }}</td>
+      <td>{% if g.picture %}
+  <img src="{{ g.picture.url }}" width="80">
+
+
+{% endif %}
+</td>
+      <td>
+        <a href="{% url 'update_gamer' g.id %}" class="btn btn-sm btn-warning">Edit</a>
+        <a href="{% url 'delete_gamer' g.id %}" class="btn btn-sm btn-danger">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+</div> 
+{% endblock %}
+
+
+
+
+
+{% endblock %}
+
+
+
+
+
+

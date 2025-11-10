@@ -1,0 +1,26 @@
+{% extends "book_1/base.html" %}
+{% load static %}
+
+
+
+  {% block footer  %}
+    
+
+  <h2>Are you sure you want to delete {{ gmr.name }}?</h2>
+  <form method="post">
+    {% csrf_token %}
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+
+    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+    <a href="{% url 'list_gamers' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+{% endblock %}
+
+    
+   

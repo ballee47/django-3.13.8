@@ -1,0 +1,75 @@
+{% extends "book_1/base.html" %}`
+{% load static %}
+
+
+
+{%  block title  %}
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            height: 100vh;
+            ;
+        }
+        .login-card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            padding: 30px;
+            width: 350px;
+            margin-left:650px;
+            margin-top:100px;`
+        }
+        .login-card h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .btn-login {
+            width: 100%;
+        }
+    </style>
+
+{% endblock %}
+
+
+
+
+{% block main_content %} 
+    
+    
+    
+        <div class="login-card">
+        <h3>Login</h3>
+
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} text-center">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+
+        <form method="POST"   action="{% url 'loginpage' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label">username</label>
+                <input type="text" name="username" class="form-control" placeholder="Enter username" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">password</label>
+                <input type="password" name="password" class="form-control" placeholder="Enter password" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-login">Login</button>
+        </form>
+
+        <p class="text-center mt-3 mb-0">
+            <a href="#">Forgot password?</a>
+        </p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    {% endblock %}

@@ -1,0 +1,11 @@
+{% extends "book_1/base.html" %}
+{% block main_content %}
+<h2>🎮 Game Categories</h2>
+
+{% for category in categories %}
+    <a href="{% url 'page2_category' category %}">
+        {{ category|capfirst }} Games
+    </a><br>
+{% endfor %}
+  
+{% endblock %}
