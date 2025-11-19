@@ -14,7 +14,7 @@ class Teacher(models.Model):
     email = models.EmailField(unique=True)
     phone = models.CharField(max_length=20, blank=True, null=True)
     hire_date = models.DateField(auto_now_add=True)
-    subjects = models.ManyToManyField(Course, blank=True)
+    Course = models.ManyToManyField(Course, blank=True)
     is_active = models.BooleanField(default=True)
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='assistant')
 

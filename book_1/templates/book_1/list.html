@@ -28,14 +28,12 @@
       <th>Picture</th>
       <th>Actions</th>
     </tr>
-    {% for g in gamers %}
+    {% for g in webuser %}
     <tr>
       <td>{{ g.id }}</td>
       <td>{{ g.username }}</td>
       <td>{{ g.password }}</td>
       <td>{{ g.email }}</td>
-      <td>{{ g.character }}</td>
-      <td>{{ g.game }}</td>
       <td>{{ g.type }}</td>
       <td>{% if g.picture %}
   <img src="{{ g.picture.url }}" width="80">

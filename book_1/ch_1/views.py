@@ -1,6 +1,5 @@
 from django.shortcuts import render , redirect
-from . models import Student , gamer 
-from . forms import UserForm1
+from . models import  web_user 
 from django.contrib import messages
 from book_1.decorators import custom_login_required , custom_login_admin , page_access_required
 
@@ -33,7 +32,7 @@ def app1_fnc(request):
     
     
 def app1_fnc2(req):
-    response1 = gamer.objects.all()
+    response1 = web_user.objects.all()
     return render(req,'app1/page2.html',{'response': response1})
 
         

@@ -34,8 +34,6 @@ urlpatterns = [
     path('login/', views.login1,name="loginpage"),
     path('logout/', views.logout1,name="logoutpage"),
     path('app1/', include('ch_1.urls'),),
-    path('success/',views.data2,name='success'),
-    path('success/<successForm>',views.data2a,),
     path('confirmation/',views.data3,name='confirmation1'),
     path('profile/',views.view_profile,name='profile1'),
     path('list_gamers/',views.list_gamer,name='list_gamers'),

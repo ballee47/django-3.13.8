@@ -1,6 +1,6 @@
 from django.shortcuts import render ,redirect , HttpResponse
-from ch_1.models import gamer , Student
-from ch_1.forms import UserForm1 , UserForm2
+from ch_1.models import web_user
+from ch_1.forms import  UserForm2
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import authenticate, login , logout
@@ -41,7 +41,7 @@ def login1(request):
 
         #  Try your custom model next
         try:
-            custom_user = gamer.objects.get(username=username)
+            custom_user = web_user.objects.get(username=username)
             # compare password (plain or hashed)
             if custom_user.password == password or check_password(password, custom_user.password):
                 # manually create session
@@ -106,16 +106,13 @@ def join12345(request):
 
 #crud
      
-def data2(request):
-    data111 =  Student.objects.latest('id')
-    return render(request,'book_1/success.html',{'data111': data111})
 
      
-def data2a(request,successForm):
-    result1 = {
-        'name': 'bilal ali'
-    }
-    return render(request,'book_1/success.html',result1)
+# def data2a(request,successForm):
+#     result1 = {
+#         'name': 'bilal ali'
+#     }
+#     return render(request,'book_1/success.html',result1)
 
 
 
@@ -123,18 +120,18 @@ def data3(request):
     saved_id = request.session.get('saved_id')
     saved_obj = None
     if saved_id:
-        saved_obj = get_object_or_404(gamer, id=saved_id)
+        saved_obj = get_object_or_404(web_user, id=saved_id)
 
     return render(request, 'book_1/confirmation.html', {'saved_obj': saved_obj})
 
     
 def list_gamer(request):
-    gamers = gamer.objects.all()
-    return render(request, 'book_1/list.html' , {'gamers': gamers})
+    webusers = web_user.objects.all()
+    return render(request, 'book_1/list.html' , {'webuser': webusers})
 
 
 def update_gamer(request, id):
-    gmr = get_object_or_404(gamer, id=id)
+    gmr = get_object_or_404(web_user, id=id)
     if request.method == "POST":
         # form= {'form':form}
         form = UserForm2(request.POST, request.FILES, instance=gmr)
@@ -149,7 +146,7 @@ def update_gamer(request, id):
 
 
 def delete_gamer(request, id):
-    gmr = get_object_or_404(gamer, id=id)
+    gmr = get_object_or_404(web_user, id=id)
     if request.method == "POST":
         gmr.delete()
         messages.success(request, "Record deleted successfully!")
@@ -165,7 +162,7 @@ def play_cod(request ,):
 def view_profile(request):
     user = request.user if request.user.is_authenticated else None
     if not user and request.session.get('custom_user_id'):
-        user = gamer.objects.filter(id=request.session['custom_user_id']).first()
+        user = web_user.objects.filter(id=request.session['custom_user_id']).first()
     
     if not user:
         messages.warning(request, "Please log in to view your profile.")
