@@ -7,3 +7,6 @@ from .models import gamer,Student
 
 admin.site.register(gamer)
 admin.site.register(Student)
+
+
+

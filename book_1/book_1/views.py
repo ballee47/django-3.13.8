@@ -11,8 +11,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import logout as django_logout
 from django.shortcuts import render, get_object_or_404
 from django.http import Http404
-
-
+from django.db import models
+from .decorators import custom_login_required , custom_login_admin , page_access_required
 
 
 
@@ -25,22 +25,21 @@ def home1(request):
     return render(request,'book_1/mainapp1.html')
 
 
-# login page
+ # login page
 
-
-def login1(request):
+def login1(request):     
     if request.method == "POST":
-        username = request.POST['username']
-        password = request.POST['password']
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
-        # 1️⃣ Try Django's built-in auth first
+        #  Try Django's built-in auth first
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
             messages.success(request, f"Welcome, {username} (Django user)!")
             return redirect('home')
 
-        # 2️⃣ Try your custom model next
+        #  Try your custom model next
         try:
             custom_user = gamer.objects.get(username=username)
             # compare password (plain or hashed)
@@ -58,7 +57,8 @@ def login1(request):
     return render(request, 'book_1/login.html')
 
 
-
+    
+           
 def logout1(request):
     django_logout(request)
     request.session.flush()
@@ -161,6 +161,44 @@ def delete_gamer(request, id):
 def play_cod(request ,):
     return HttpResponse("this the cod gaming room")    
 
+
+def view_profile(request):
+    user = request.user if request.user.is_authenticated else None
+    if not user and request.session.get('custom_user_id'):
+        user = gamer.objects.filter(id=request.session['custom_user_id']).first()
+    
+    if not user:
+        messages.warning(request, "Please log in to view your profile.")
+        return redirect('loginpage')
+
+    # Handle updates
+    if request.method == 'POST':
+        editable_fields = [
+            f.name for f in user._meta.fields
+            if f.name not in ('id', 'password', 'last_login', 'date_joined', 'is_staff', 'is_superuser')
+            and not isinstance(f, (models.DateField, models.DateTimeField))
+        ]
+        for field in editable_fields:
+            new_value = request.POST.get(field)
+            if new_value is not None:
+                setattr(user, field, new_value)
+        user.save()
+        messages.success(request, "✅ Profile updated successfully!")
+        return redirect('home')
+    # Prepare display data
+    user_details = {
+        f.name: getattr(user, f.name) for f in user._meta.fields
+        
+    }
+
+    return render(request, 'book_1/profile.html', {'user_details': user_details})
+
+
+
+
+
+
+
 #the page2 working
 
 ALL_GAMES = {
@@ -188,7 +226,7 @@ def get_game_by_id(game_id):
     return None
 
 
-
+@page_access_required
 def page2(request):
     categories = ALL_GAMES.keys()
     return render(request, 'book_1/page2.html', {'categories': categories})

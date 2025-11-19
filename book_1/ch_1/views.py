@@ -2,10 +2,12 @@ from django.shortcuts import render , redirect
 from . models import Student , gamer 
 from . forms import UserForm1
 from django.contrib import messages
+from book_1.decorators import custom_login_required , custom_login_admin , page_access_required
+
 
 
 # Create your views here.
-
+@page_access_required
 def app1_fnc(request):
     return render(request,'app1/app1.html')
 

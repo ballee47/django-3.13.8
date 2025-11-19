@@ -42,13 +42,44 @@
       <a class="a1"   href="/admin/">ADMIN</a>
       <a  href="{% url 'joinpage' %}"  class="a1" >register</a>
 
-      {% if user.is_authenticated  %}
+      {% comment %} {% if user.is_authenticated  %}
       <a  href="{% url 'logoutpage' %}"  class="a1" > log out</a>
       {% else %}
       <a  href="{% url 'loginpage' %}"  class="a1" >log in</a>
-      {% endif%}
-    </div>
+      {% endif%} {% endcomment %}
+{% if user.is_authenticated %}
+  <div class="dropdown">
+    <a class=" text-light dropdown-toggle text-decoration-none" href="#" role="button" data-bs-toggle="dropdown">
+      👋 {{ user.username }}
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end">
+      <li><a class="dropdown-item" href="{% url 'profile1' %}">🧑 Profile</a></li>
+      <li><a class="dropdown-item" href="{% url 'logoutpage' %}">🚪 Sign Out</a></li>
+    </ul>
+  </div>
+
+{% elif request.session.custom_username %}
+  <div class="dropdown">
+    <a class="text-light dropdown-toggle text-decoration-none" href="#" role="button" data-bs-toggle="dropdown">
+      👋 {{ request.session.custom_username }}
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end">
+      <li><a class="dropdown-item" href="{% url 'profile1' %}">🧑 Profile</a></li>
+      <li><a class="dropdown-item" href="{% url 'logoutpage' %}">🚪 Sign Out</a></li>
+    </ul>
+  </div>
+
+{% else %}
+  <a class="a1" href="{% url 'loginpage' %}">Login</a>
+{% endif %}
+
   </nav>
+
+
+
+
+
+  
    
 
 

@@ -37,6 +37,7 @@ urlpatterns = [
     path('success/',views.data2,name='success'),
     path('success/<successForm>',views.data2a,),
     path('confirmation/',views.data3,name='confirmation1'),
+    path('profile/',views.view_profile,name='profile1'),
     path('list_gamers/',views.list_gamer,name='list_gamers'),
     path('update/<int:id>/', views.update_gamer, name='update_gamer'),
     path('delete/<int:id>/', views.delete_gamer, name='delete_gamer'),

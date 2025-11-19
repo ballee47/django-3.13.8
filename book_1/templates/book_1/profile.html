@@ -1,0 +1,38 @@
+{% extends "book_1/base.html" %}
+{% load static %}
+
+
+
+
+{% block main_content %} 
+    <h2>👤 Profile</h2>
+
+<form method="POST">
+  {% csrf_token %}
+  <table border="1" cellpadding="6" cellspacing="0">
+    <tr><th>Field</th><th>Value</th></tr>
+
+    {% for field, value in user_details.items %}
+      {% if field not in "id password last_login date_joined is_staff is_superuser" %}
+        <tr>
+          <td><strong>{{ field|capfirst }}</strong></td>
+          <td><input type="text" name="{{ field }}" value="{{ value }}" style="width:100%;"></td>
+        </tr>
+      {% else %}
+        <tr>
+          <td><strong>{{ field|capfirst }}</strong></td>
+          <td>{{ value }}</td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+  </table>
+  <br>
+  <button type="submit">💾 Save</button>
+</form>
+
+{% for message in messages %}
+  <p>{{ message }}</p>
+{% endfor %}
+
+    
+    {% endblock %}

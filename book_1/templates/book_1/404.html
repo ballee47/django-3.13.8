@@ -1,23 +1,36 @@
 {% extends 'book_1/base.html' %}
+{% load static %}
 
-{% block main_content %} 
-    
-    
-    
-    
-  
-
-
-
-
-{% block content %}
+{% block main_content %}
 <div style="text-align:center; padding:50px;">
-    <h1>😢 Page Not Found</h1>
-    <p>The game or category you are looking for doesn’t exist.</p>
-    <a href="{% url 'page2' %}" class="btn">Back to Games</a>
+    {% if errors %}
+  {% for err in errors %}
+    <h1>{{ err }}</h1>
+  {% endfor %}
+{% endif %}
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+    <h1>{{ error_message }}</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+    {% if messages %}
+      {% for message in messages %}
+        <h6>{{ message }}</h6>
+      {% endfor %}
+    {% endif %}
+
+    <a href="{% url 'page2' %}" class="btn btn-danger">Back to Games</a>
+    <a href="{% url 'loginpage' %}" class="btn btn-warning">Back to login</a>
 </div>
 {% endblock %}
-
-
-  
-    {% endblock %}
