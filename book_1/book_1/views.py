@@ -13,9 +13,10 @@ from django.shortcuts import render, get_object_or_404
 from django.http import Http404
 from django.db import models
 from .decorators import custom_login_required , custom_login_admin , page_access_required
-
-
-
+from courses.models import Course
+from students.models import Student
+from teacher.models import Teacher 
+from ch_1.models import web_user
 
 
 # home page
@@ -87,22 +88,34 @@ def join1234(request):
 
 
 
-def join12345(request):
+def register_form(request):
     if request.method == "POST":
         form = UserForm2(request.POST, request.FILES)
         datae= {'form':form}
         if form.is_valid():
-            saved_object = form.save()
-            request.session['saved_id'] = saved_object.id
-            messages.success(request, 'Added successfully!')
-            return redirect('confirmation1')
-        else:
-            messages.error(request, 'Please correct the errors below.')
+         user = form.save()
+         role = user.role
+
+         # Create record in corresponding app table
+        if role == 'Student':
+             Student.objects.create(user=user)
+             return redirect('home')
+        elif role == 'Teacher':
+                Teacher.objects.create(user=user)
+                return redirect('home')
+            # Add other roles as needed
+        elif role == 'Course':
+                Course.objects.create(user=user)
+                return redirect('home')
+        elif role == 'web_user':
+                web_user.objects.create(username=username)
+                return redirect('home')
+
+        messages.success(request, f'Account created for {user.username} as {role}')
     else:
         form = UserForm2()
 
-    return render(request, 'book_1/join.html', {'form': form})
-  
+    return render(request, 'book_1/register.html', {'form': form})
 
 #crud
      

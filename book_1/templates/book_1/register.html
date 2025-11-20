@@ -1,0 +1,20 @@
+{% extends "book_1/base.html" %}
+{% load static %}
+
+
+{% block main_content %} 
+<div class="register-form">
+    <h2 style="text-align:center;">Register</h2>
+    <form method="POST" >
+        {% csrf_token %}
+        {% for field in form %}
+            {{ field.label_tag }}<br>
+            {{ field }}<br>
+            {% if field.errors %}
+                <div class="error">{{ field.errors }}</div>
+            {% endif %}
+        {% endfor %}
+        <button type="submit">Register</button>
+    </form>
+</div>
+{% endblock %}

@@ -5,4 +5,4 @@ from .models import Teacher
 class TeacherAdmin(admin.ModelAdmin):
     list_display = ('first_name', 'last_name', 'email', 'hire_date', 'is_active')
     search_fields = ('first_name', 'last_name', 'email')
-    list_filter = ('is_active', 'Course')
+    list_filter = ('is_active', )

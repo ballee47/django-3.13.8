@@ -1,5 +1,7 @@
 from django.db import models
 
+
+
 class Course(models.Model):
     name = models.CharField(max_length=100)             # Name of the course
     code = models.CharField(max_length=10, unique=True) # Unique code like MATH101

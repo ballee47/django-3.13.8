@@ -26,7 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls, name="admin"),
     path('', views.home1,name="home"),
     path('logged/', views.loggedin,name="loggedin"),
-    path('join/', views.join12345,name="joinpage"),
+    path('join/', views.register_form,name="joinpage"),
     path('page2/', views.page2, name='page2'),  # category list
     path('page2/<str:category>/', views.page2_category, name='page2_category'),  # games in category
     path('page2/<str:category>/<int:id>/<str:names>/', views.page2_detail, name='page2_detail'),  # game details
@@ -34,6 +34,9 @@ urlpatterns = [
     path('login/', views.login1,name="loginpage"),
     path('logout/', views.logout1,name="logoutpage"),
     path('app1/', include('ch_1.urls'),),
+    path('students/', include('ch_1.urls'),),
+    path('courses/', include('ch_1.urls'),),
+    path('teacher/', include('ch_1.urls'),),
     path('confirmation/',views.data3,name='confirmation1'),
     path('profile/',views.view_profile,name='profile1'),
     path('list_gamers/',views.list_gamer,name='list_gamers'),
